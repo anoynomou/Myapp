@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+    </script>
+    <style>
+    *{margin: 0px;padding: 0px;}
+   </style>
+</head>
+<body>
+<div style="width: 100%;height: 100%">
+
+<div style="margin: auto;background-color: rgb(65, 211, 126);width: 90%;height: 40%;border-radius: 10px;display: flex;flex-direction: column;margin-top: 40%;">
+<text style="align-self: center;font-size: 19px;margin-top: 5%;">Change Password</text>
+<input id="password" style="width: 80%;align-self: center;height: 35px;border-radius: 8px;margin-top: 17%;margin-bottom: 20px;" placeholder="Enter your new Password" >
+
+<button style="align-self: center;width: 60px;height: 35px;color: rgb(218, 209, 97);border-radius: 10px;" onclick="Requstsender()">
+SAVE
+</button>
+
+</div>
+
+</div>
+<script>
+var Name = '<%= name %>'
+
+async function Requstsender(){
+var Password =String(document.getElementById('password').value);
+var VIPPASS = ''
+var IOP = true;
+for(let i = 0;i < Password.length;i++){
+if(Password[i] !== '/'){
+
+VIPPASS = VIPPASS + Password[i]
+}else{IOP = false}
+
+}
+
+if(VIPPASS && IOP){
+
+await fetch('/Password/'+VIPPASS+'/'+Name).catch((err)=>{console.log(err)})
+}
+}
+
+</script>
+</body>
+</html>
