@@ -1,7 +1,7 @@
 var Express = require('express');
 var app = Express();
-var PORT = process.env.PORT || 3000;
-var http = require('http').createServer(app);
+var port = process.env.PORT || 8000;
+var http = require('http').createServer(app).listen(port);
 var Firebase = require('firebase')
 var CryptoJS = require("crypto-js");
 
@@ -50,7 +50,7 @@ await Firebase.database().ref("Acount/"+name).update({password:password})
 
 
 
-http.listen(PORT,()=>{console.log('app is runing on port :' + PORT)});
+
 
 
  /*
