@@ -1,7 +1,9 @@
 var Express = require('express');
 var app = Express();
 var port = process.env.PORT || 8000;
-app.listen(port);
+
+
+
 var Firebase = require('firebase')
 var CryptoJS = require("crypto-js");
 
@@ -68,6 +70,8 @@ console.log(originalText); // 'my mess
 
 
 app.set('view engine', 'ejs')
+app.set('Views',__dirname+'/Views')
+app.use(Express.static(__dirname+'/Views'))
 
 app.get('/', (req, res) => {
   res.render('index.ejs');
@@ -161,3 +165,4 @@ console.log(Parcer(data));
 });
 
 
+app.listen(port);
