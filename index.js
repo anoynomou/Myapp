@@ -1,7 +1,7 @@
 var Express = require('express');
 var app = Express();
 var port = process.env.PORT || 8000;
-var http = require('http').createServer(app).listen(port);
+app.listen(port);
 var Firebase = require('firebase')
 var CryptoJS = require("crypto-js");
 
