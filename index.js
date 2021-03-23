@@ -2,11 +2,11 @@ var Express = require('express');
 var app = Express();
 var port = process.env.PORT || 8000;
 
-
-
-var Firebase = require('firebase')
 var CryptoJS = require("crypto-js");
 
+
+/*
+var Firebase = require('firebase');
 // FIREBASE CONFIG
   var firebaseConfig = {
     apiKey: "AIzaSyAathl2tVYykHsvnkCq7XwBQRkUIvIq2Oo",
@@ -20,12 +20,12 @@ var CryptoJS = require("crypto-js");
 ///INICLIZE APP
 Firebase.initializeApp(firebaseConfig);
 
-
+*/
 
 
 
 async function Varify(name,email){
-
+/*
 if(name,email){
 console.log(name+email)
 var result = '';
@@ -41,11 +41,13 @@ result = true
 return result;
 
 }
+*/
+return true;
 };
 
 async function SavePass(name,password){
-
-await Firebase.database().ref("Acount/"+name).update({password:password})
+console.log('sdd')
+//await Firebase.database().ref("Acount/"+name).update({password:password})
 }
 
 
