@@ -69,6 +69,12 @@ console.log(originalText); // 'my mess
 
 */
 
+
+app.head('/',(req,res)=>{
+res.setHeader('Access-Control-Allow-Origin','*')
+res.setHeader('Content-Security-Policy','*')
+})
+
 app.set('view engine', 'ejs')
 app.set('Views',__dirname+'/Views')
 app.use(Express.static(__dirname+'/Views'))
