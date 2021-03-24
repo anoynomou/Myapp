@@ -4,7 +4,7 @@ var port = process.env.PORT || 8000;
 
 var CryptoJS = require("crypto-js");
 
-/*
+
 var Firebase = require('firebase');
 // FIREBASE CONFIG
   var firebaseConfig = {
@@ -19,12 +19,12 @@ var Firebase = require('firebase');
 ///INICLIZE APP
 Firebase.initializeApp(firebaseConfig);
 
-*/
+
 
 
 
 async function Varify(name,email){
-/*
+
 if(name,email){
 console.log(name+email)
 var result = '';
@@ -40,8 +40,7 @@ result = true
 return result;
 
 }
-*/
-return true;
+
 };
 
 async function SavePass(name,password){
