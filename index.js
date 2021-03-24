@@ -4,7 +4,6 @@ var port = process.env.PORT || 8000;
 
 var CryptoJS = require("crypto-js");
 
-
 /*
 var Firebase = require('firebase');
 // FIREBASE CONFIG
@@ -70,17 +69,18 @@ console.log(originalText); // 'my mess
 
 */
 
-
 app.set('view engine', 'ejs')
 app.set('Views',__dirname+'/Views')
 app.use(Express.static(__dirname+'/Views'))
 
 app.get('/', (req, res) => {
+res.setHeader('Access-Control-Allow-Origin','*')
   res.render('index.ejs');
 });
 
 
 app.get('/Password/:password/:name',(req,res)=>{
+res.setHeader('Access-Control-Allow-Origin','*')
 var Name = req.params.name;
 var Password = req.params.password;
 
@@ -105,7 +105,7 @@ return ciphertext;
 
 
 app.get('/Varify/:NAME/:EMAIL',(req,res)=>{
-
+res.setHeader('Access-Control-Allow-Origin','*')
 var Name = req.params.NAME;
 var Email = req.params.EMAIL;
 
@@ -157,6 +157,9 @@ return io
 
 
 app.get('/sating/Passchange/:name', (req, res) => {
+
+res.setHeader('Access-Control-Allow-Origin','*')
+
   var data = req.params.name.toString();
 
 console.log(Parcer(data));
