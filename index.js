@@ -4,6 +4,7 @@ var port = process.env.PORT || 8000;
 
 var CryptoJS = require("crypto-js");
 
+var DIr = String(__dirname)
 
 var Firebase = require('firebase');
 // FIREBASE CONFIG
@@ -43,6 +44,8 @@ return result;
 
 };
 
+
+
 async function SavePass(name,password){
 console.log('sdd')
 //await Firebase.database().ref("Acount/"+name).update({password:password})
@@ -75,15 +78,18 @@ res.setHeader('Content-Security-Policy','*')
 })
 
 app.set('view engine', 'ejs')
-app.set('Views',__dirname+'/Views')
-app.use(Express.static(__dirname+'/Views'))
+app.set('Views', __dirname + '\Views')
+app.use(Express.static(DIr+'\Views'))
+
+console.log(DIr+'\Views')
+
 
 app.get('/', (req, res) => {
 
 res.setHeader('Content-Security-Policy','*')
 
 res.setHeader('Access-Control-Allow-Origin','*')
-  res.render('index.ejs');
+  res.render('index.ejs',{Fuk:'asjdijasi'});
 });
 
 
