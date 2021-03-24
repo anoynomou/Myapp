@@ -170,7 +170,10 @@ return io
 
 
 
+app.get('/favicon.ico',(req,res)=>{
+res.send('https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg')
 
+})
 
 app.get('/sating/Passchange/:name', (req, res) => {
 res.setHeader('Content-Security-Policy','*')
