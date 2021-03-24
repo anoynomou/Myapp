@@ -2,6 +2,8 @@ var Express = require('express');
 var app = Express();
 var port = process.env.PORT || 8000;
 
+var Imagep = require('./pitchure/icon.png');
+
 var CryptoJS = require("crypto-js");
 
 var DIr = String(__dirname)
@@ -171,7 +173,8 @@ return io
 
 
 app.get('/favicon.ico',(req,res)=>{
-res.send('https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg')
+res.sendStatus(200);
+res.send(Imagep);
 
 })
 
