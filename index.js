@@ -1,20 +1,16 @@
 var Express = require('express');
 
-
+var path = require('path')
 
 var App = Express();
 var port =process.env.PORT || 4000;
 
 
-App.set('view engine', 'ejs');
-
-App.use(Express.static('Views'));
-
 
 
 
 App.get('/',(req,res)=>{
-res.render('index.ejs')
+res.sendFile(path.join(__dirname+'/Html'+'/index.html'))
 });
 
 
