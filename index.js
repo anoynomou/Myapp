@@ -12,18 +12,14 @@ App.set('view engine', 'ejs');
 
 
 
+
 App.get('/',(req,res)=>{
 res.render('index.ejs')
+});
 
-})
-
-App.get('/Sating/:name/:email',(req,res)=>{
-
-res.render('sating');
-})
 
 App.all('*',(req,res)=>{
 res.send('Wrong path')
-})
+});
 
 App.listen(port);
