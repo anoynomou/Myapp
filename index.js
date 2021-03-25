@@ -13,7 +13,7 @@ App.set('view engine', 'ejs');
 
 
 App.get('/',(req,res)=>{
-res.send('index')
+res.render('index.ejs')
 
 })
 
