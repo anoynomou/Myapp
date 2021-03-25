@@ -1,195 +1,29 @@
 var Express = require('express');
-var app = Express();
-var port = process.env.PORT || 8000;
 
-var Imagep = require('./pitchure/icon.png');
 
-var CryptoJS = require("crypto-js");
 
-var DIr = String(__dirname)
+var App = Express();
+var port =process.env.PORT || 4000;
 
-var Firebase = require('firebase');
-// FIREBASE CONFIG
-  var firebaseConfig = {
-    apiKey: "AIzaSyAathl2tVYykHsvnkCq7XwBQRkUIvIq2Oo",
-    authDomain: "mysckendapp.firebaseapp.com",
-    databaseURL: "https://mysckendapp-default-rtdb.firebaseio.com",
-    projectId: "mysckendapp",
-    storageBucket: "mysckendapp.appspot.com",
-    messagingSenderId: "799254964254",
-    appId: "1:799254964254:web:0a79fbe6405e9d6d29660f"
-  };
-///INICLIZE APP
-Firebase.initializeApp(firebaseConfig);
+
+App.set('view engine', 'ejs');
 
 
 
 
 
-async function Varify(name,email){
-
-if(name,email){
-console.log(name+email)
-var result = '';
-await Firebase.database().ref("Acount/"+name+"/useremail").once('value',Snapshot=>{
-
-if (Snapshot.val() === email){
-result = true
-}else{result = false}
-
-});
-
-
-return result;
-
-}
-
-};
-
-
-
-async function SavePass(name,password){
-console.log('sdd')
-//await Firebase.database().ref("Acount/"+name).update({password:password})
-}
-
-
-
-
-
-
-
-
- /*
-// Encrypt
-var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
-
-console.log(ciphertext)
-// Decrypt
-var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-var originalText = bytes.toString(CryptoJS.enc.Utf8);
- 
-console.log(originalText); // 'my mess
-
-*/
-
-
-app.head('/',(req,res)=>{
-res.setHeader('Access-Control-Allow-Origin','*')
-res.setHeader('Content-Security-Policy','*')
-})
-
-app.set('view engine', 'ejs')
-app.set('Views', __dirname + '\Views')
-app.use(Express.static(DIr+'\Views'))
-
-console.log(DIr+'\Views')
-
-
-app.get('/', (req, res) => {
-
-res.setHeader('Content-Security-Policy','*')
-
-res.setHeader('Access-Control-Allow-Origin','*')
-  res.render('index.ejs',{Fuk:'asjdijasi'});
-});
-
-
-app.get('/Password/:password/:name',(req,res)=>{
-res.setHeader('Access-Control-Allow-Origin','*')
-res.setHeader('Content-Security-Policy','*')
-var Name = req.params.name;
-var Password = req.params.password;
-
-SavePass(Name,Password);
-res.send('ok')
-})
-
-
-function DEcriptor(data,secretkey){
-var ciphertext = CryptoJS.AES.decrypt(data,secretkey);
-var originalText = ciphertext.toString(CryptoJS.enc.Utf8);
-return originalText;
-};
-
-function Incriptor(data,secretkey){
-
-
-
-var ciphertext = CryptoJS.AES.encrypt(data,secretkey).toString();
-return ciphertext;
-};
-
-
-app.get('/Varify/:NAME/:EMAIL',(req,res)=>{
-res.setHeader('Content-Security-Policy','*')
-res.setHeader('Access-Control-Allow-Origin','*')
-var Name = req.params.NAME;
-var Email = req.params.EMAIL;
-
-
-if(Name,Email){
-
-Varify(Name,Email).then(val=>{
-
-if(val === true){
-res.sendStatus(200);
-
-}else{res.sendStatus(404)}
-
-
-
-}).catch((err)=>{console.log(err)})
-
-
-
-}
+App.get('/',(req,res)=>{
+res.send('index')
 
 })
-   
 
+App.get('/Sating/:name/:email',(req,res)=>{
 
-function Parcer(data = ''){
-io = ''
-
-for (let i = 0;i<data.length;i++){
-
-if(i === 0 && data[i] === '&'){
-null
-}else if(i === 1 && data[i] === '='){
-null
-}else if(data[i] === '℗'){
-io = io + '/'
-}
-
-else{io = io + data[i]}
-
-}
-
-
-return io
-};
-
-
-
-app.get('/favicon.ico',(req,res)=>{
-res.sendStatus(200);
-res.send(Imagep);
-
+res.render('sating');
 })
 
-app.get('/sating/Passchange/:name', (req, res) => {
-res.setHeader('Content-Security-Policy','*')
-res.setHeader('Access-Control-Allow-Origin','*')
+App.all('*',(req,res)=>{
+res.send('Wrong path')
+})
 
-  var data = req.params.name.toString();
-
-console.log(Parcer(data));
-  var UIP=DEcriptor(Parcer(data),'pasta')
-  res.render('sating.ejs',{name:UIP})
-
-
-});
-
-
-app.listen(port);
+App.listen(port);

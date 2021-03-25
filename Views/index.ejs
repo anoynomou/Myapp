@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self' http://myapp-web-chg-pass.herokuapp.com">
+
     <title>Document</title>
      <style>
       *{margin: 0px;padding: 0px;}
@@ -15,7 +15,7 @@
 <body>
 
 <div style="width: 100%;height: 100%" >
-
+<!--<meta http-equiv="Content-Security-Policy" content="img-src 'self' data:; default-src 'self' http://myapp-web-chg-pass.herokuapp.com">-->
 <div style="margin: auto;width: 80%;height: 60%;background-color: cyan;display: flex;flex-direction: column;margin-top: 20%;padding: 15px;border-radius: 10px;align-content: center;align-items: center;">
 
 
@@ -25,11 +25,11 @@
 <input id='username' type="text" style="width:75%;height: 33px;border-radius:10px;margin-bottom: 10px;" placeholder="Dolphino acount name" maxlength="16"/>
 <input id='useremail'  style="width:75%;height: 33px;border-radius: 15px;margin-bottom: 10px;"  type="email" placeholder="Dolphino acount email " maxlength="36" />
 
-<button style="width:90px;height:40px;border-radius: 6px;background-color: greenyellow;margin-bottom: 15px;font-size: 17px;" onclick="Sendcode()"  >Send Code</button>
+<button style="width:90px;height:40px;border-radius: 6px;background-color: greenyellow;margin-bottom: 15px;font-size: 17px;"   >Send Code</button>
 
 <input type="text" style="width:45%;height: 30px;border-radius: 10px;margin-bottom: 18px;" id='CODE' placeholder="Code * * * *" />
 
-<button id="btn"  style="background-color:  rgb(40, 154, 207);width: 65px;height: 35px;border-radius: 6px;font-size: 19px;" onclick="Login()"  >Login</button>
+<button id="btn"  style="background-color:  rgb(40, 154, 207);width: 65px;height: 35px;border-radius: 6px;font-size: 19px;"   >Login</button>
 
 
 </div>
@@ -40,108 +40,7 @@
 
 
 
-<script>
-/*
-var Randomcode = '';
 
-function R_CODE(){
-var r1 = String(Math.floor(Math.random() * 11));
-var r2 = String(Math.floor(Math.random() * 11));
-var r3 = String(Math.floor(Math.random() * 11));
-var r4 = String(Math.floor(Math.random() * 11));
-var r5 = (r1+r2+r3+r4)
-return r5
-};
-
-
-function Incriptor(data = '',secretkey = ''){
-
-var ciphertext = CryptoJS.AES.encrypt(data,secretkey).toString();
-
-return ciphertext;
-};
-
-
-
-function DEcriptor(data = '',secretkey = ''){
-
-var ciphertext = CryptoJS.AES.decrypt(data,secretkey);
-var originalText = ciphertext.toString(CryptoJS.enc.Utf8);
-
-return originalText;
-
-
-
-};
-
-
-
-
-async function Emailsender(useremail){
-var VIPcode = DEcriptor(Randomcode,'pasta')
-console.log(VIPcode)
-
-
-await fetch(`https://server-app-mobile-3.herokuapp.com/${useremail}/VarifyCode/${VIPcode}`).then(()=>{
-console.log('code Sended..')
-
-}).catch(err=>{console.log(err)})
-
-
-};
-
-
-async function Sendcode(){
-Randomcode = Incriptor(R_CODE(),'pasta');
-var UserName= document.getElementById('username').value;
-var Useremail = document.getElementById('useremail').value;
-
-
-
-await fetch('/Varify/'+UserName+'/'+Useremail).then((val)=>{
-
-
-if(val.status === 200){
-Emailsender(Useremail);
-}else{
-
-console.log('un varified');
-}
-
-
-}).catch(err=>{console.log(err)})
-
-setTimeout(() => {
-       Randomcode = Incriptor(R_CODE(),'pasta');
-       console.log(Randomcode)
-}, 240000);
-}
-
-function Login(){
-var Mycodevalue = document.getElementById('CODE').value;
-
-var UserName= document.getElementById('username').value;
-var Useremail = document.getElementById('useremail').value;
-
-if (Mycodevalue === DEcriptor(Randomcode,'pasta')){
-var name =String(Incriptor(UserName,'pasta'))
-op = ''
-for (let i = 0;i < name.length;i++){
-if(name[i] === '/'){
-op = op + '℗'
-}else{op = op + name[i]}
-}
-console.log(op)
-//window.location.href = `/sating/Passchange/&=${op}`
-
-}
-
-
-}
-
-*/
-
-</script>
 
 </body>
 </html>
