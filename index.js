@@ -13,6 +13,10 @@ App.get('/',(req,res)=>{
 res.sendFile(path.join(__dirname+'/Html'+'/index.html'))
 });
 
+App.get('/sating',(req,res)=>{
+res.sendFile(path.join(__dirname+'/Html'+'/sating.html'))
+});
+
 
 App.all('*',(req,res)=>{
 res.send('Wrong path')
