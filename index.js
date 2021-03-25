@@ -8,7 +8,7 @@ var port =process.env.PORT || 4000;
 
 App.set('view engine', 'ejs');
 
-
+App.use(Express.static('Views'));
 
 
 
