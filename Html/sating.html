@@ -3,8 +3,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dolphino</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/38/a8/bd/38a8bd3398a1a0ca0c790ac66df695ed.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous"></script>
     <style>
+
     *{margin: 0px;padding: 0px;}
    </style>
 </head>
@@ -15,13 +18,50 @@
 <text style="align-self: center;font-size: 19px;margin-top: 5%;">Change Password</text>
 <input id="password" style="width: 80%;align-self: center;height: 35px;border-radius: 8px;margin-top: 17%;margin-bottom: 20px;" placeholder="Enter your new Password" >
 
-<button style="align-self: center;width: 60px;height: 35px;color: rgb(218, 209, 97);border-radius: 10px;" >
+<button style="align-self: center;width: 60px;height: 35px;color: rgb(218, 209, 97);border-radius: 10px;" onclick="ChangePass()" >
 SAVE
 </button>
 
 </div>
 
 </div>
+<script>
 
+function EncriptorOrdecriptor(data ='',key,mode = 'encrypt'){
+var result = ''
+if(mode === 'encrypt'){
+var encrypted = CryptoJS.AES.encrypt(data,key);
+encrypted =  String(encrypted);
+for(let i =0;i < encrypted.length;i++){
+if(encrypted[i] === '/'){
+result = result + '℗'
+}else{result = result + encrypted[i]}
+
+}
+}else{
+var prepair = ''
+for(let i = 0;i < data.length;i++){
+if(data[i] === '℗'){
+prepair = prepair + '/'
+}else{prepair = prepair + data[i]}
+}
+var decr = CryptoJS.AES.decrypt(prepair, key);
+decr = decr.toString(CryptoJS.enc.Utf8);
+result = decr
+
+}
+return result
+}
+
+
+
+
+
+async function ChangePass(){
+var UserInput = document.getElementById('password').value;
+
+}
+
+</script>
 </body>
 </html>

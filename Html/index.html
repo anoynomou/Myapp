@@ -3,7 +3,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dolphino</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/38/a8/bd/38a8bd3398a1a0ca0c790ac66df695ed.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous"></script>
      <style>
       *{margin: 0px;padding: 0px;}
      </style>
@@ -24,11 +26,11 @@
 <input id='username' type="text" style="width:75%;height: 33px;border-radius:10px;margin-bottom: 10px;" placeholder="Dolphino acount name" maxlength="16"/>
 <input id='useremail'  style="width:75%;height: 33px;border-radius: 15px;margin-bottom: 10px;"  type="email" placeholder="Dolphino acount email " maxlength="36" />
 
-<button style="width:90px;height:40px;border-radius: 6px;background-color: greenyellow;margin-bottom: 15px;font-size: 17px;"   >Send Code</button>
+<button style="width:90px;height:40px;border-radius: 6px;background-color: greenyellow;margin-bottom: 15px;font-size: 17px;" onclick="Sendmecode()">Send Code</button>
 
 <input type="text" style="width:45%;height: 30px;border-radius: 10px;margin-bottom: 18px;" id='CODE' placeholder="Code * * * *" />
 
-<button id="btn"  style="background-color:  rgb(40, 154, 207);width: 65px;height: 35px;border-radius: 6px;font-size: 19px;"   >Login</button>
+<button id="btn"  style="background-color:  rgb(40, 154, 207);width: 65px;height: 35px;border-radius: 6px;font-size: 19px;" onclick="Login()"   >Login</button>
 
 
 </div>
@@ -38,7 +40,121 @@
 
 
 
+<script>
+// User RandomCode
+var Random_code = '';
 
+//TODO: Random code genarator
+
+function R_CODE(){
+var r1 = String(Math.floor(Math.random() * 11));
+var r2 = String(Math.floor(Math.random() * 11));
+var r3 = String(Math.floor(Math.random() * 11));
+var r4 = String(Math.floor(Math.random() * 11));
+var r5 = (r1+r2+r3+r4)
+return r5
+};
+
+
+//  Make value Decoded & Encoded
+
+function EncriptorOrdecriptor(data ='',key,mode = 'encrypt'){
+var result = ''
+if(mode === 'encrypt'){
+var encrypted = CryptoJS.AES.encrypt(data,key);
+encrypted =  String(encrypted);
+for(let i =0;i < encrypted.length;i++){
+if(encrypted[i] === '/'){
+result = result + '℗'
+}else{result = result + encrypted[i]}
+
+}
+}else{
+var prepair = ''
+for(let i = 0;i < data.length;i++){
+if(data[i] === '℗'){
+prepair = prepair + '/'
+}else{prepair = prepair + data[i]}
+}
+var decr = CryptoJS.AES.decrypt(prepair, key);
+decr = decr.toString(CryptoJS.enc.Utf8);
+result = decr
+
+}
+return result
+}
+
+/// Fatch all User input value
+
+function Fetchdata(){
+
+var Name = document.getElementById('username').value;
+var Email = document.getElementById('useremail').value;
+var Code = document.getElementById('CODE').value;
+return {Name,Email,Code}
+}
+
+
+// Send code
+
+async function Sendmecode(){
+
+
+var name = EncriptorOrdecriptor(Fetchdata().Name,'pasta');
+var email = EncriptorOrdecriptor(Fetchdata().Email,'pasta');
+if(name && email){
+
+await fetch(`/Emailvarifier/${name}/${email}`).then((val)=>{
+
+if(val.status === 200){
+var NewCode = R_CODE();
+Random_code = EncriptorOrdecriptor(NewCode,'pasta');
+
+Emailsender(EncriptorOrdecriptor(email,'pasta','dec'),'Varifycode',NewCode)
+
+}else{
+console.log('Unvarify')
+}
+
+
+}).catch((err)=>{console.log(err)})
+
+
+
+
+};
+
+
+}
+
+
+// Login function
+
+function Login(){
+var Mycode = Fetchdata().Code;
+
+if(Mycode === EncriptorOrdecriptor(Random_code,'pasta','dec')){
+var TY = EncriptorOrdecriptor(Fetchdata().Name,'pasta')
+window.location.href = '/sating/'+TY;
+}else{
+
+var NewCode = R_CODE();
+Random_code = EncriptorOrdecriptor(NewCode,'pasta')
+alert("You enterd wrong code\nYour varification code changed")
+}
+}
+
+
+// TODO:Send Email
+async function Emailsender(To,Title,text1){
+
+await fetch(`https://server-app-mobile-3.herokuapp.com/${To}/${Title}/${text1}`).then((val)=>{
+console.log(val)
+}).catch((err)=>{})
+
+}
+
+</script>
 
 
 </body>
